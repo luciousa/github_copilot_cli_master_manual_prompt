@@ -1,0 +1,21 @@
+Windows CLI 1.0.109; disposable synthetic Git repository and Copilot home; token environment variables removed; non-interactive stdin; automatic update disabled. Only synthetic files were supplied.
+
+Exit code: 0
+
+Instruction file created: True
+
+Generated file (synthetic content, not verified guidance):
+# Repository context
+
+The README describes this project as a synthetic calculator for adding two integers.
+
+## Architecture
+
+All runtime code is in the top-level `calc.py` module. Its `add(a, b)` function is the calculator's entry point; callers import it and use the returned result.
+
+## Key conventions
+
+- Keep calculator operations as plain module-level functions that return results rather than printing them.
+- `add(a, b)` currently delegates directly to Python's `+` operator, without input conversion or validation. Preserve this behavior unless the requested change explicitly alters it.
+- Keep the README's stated integer-addition scope aligned with changes to the calculator.
+

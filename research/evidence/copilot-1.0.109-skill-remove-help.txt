@@ -1,0 +1,31 @@
+Usage: copilot skill remove <name-or-directory>
+
+Remove a skill or a custom skill directory.
+
+Pass a custom directory previously added with `copilot skill add` to unregister
+it, or pass the name of a skill to delete it from your personal skills directory
+(~/.copilot/skills/ or ~/.agents/skills/) or from .github/skills/ at the
+repository root.
+
+Other project skills, in .agents/skills/, .claude/skills/ or a subdirectory's
+.github/skills/, are not removed by name: delete the skill's directory instead.
+Skills provided by a plugin or the builtin set cannot be removed this way.
+
+Arguments:
+  <name-or-directory>
+          Skill name or custom skill directory
+
+Options:
+  -h, --help
+          Print help (see a summary with '-h')
+
+Examples:
+  # Remove a custom skill directory
+  $ copilot skill remove ~/my-custom-skills
+
+  # Delete a personal or project skill by name
+  $ copilot skill remove my-skill
+
+Learn More:
+  Use `copilot <command> --help` for more information about a command.
+  Read the documentation at https://docs.github.com/copilot/how-tos/copilot-cli

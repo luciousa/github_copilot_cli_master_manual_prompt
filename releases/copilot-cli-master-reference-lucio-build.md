@@ -1,0 +1,106 @@
+# Word reference build report
+
+- Built: 2026-11-11
+- Author: Lucio A. Da Silva
+- Output: D:\dev\github_copilot_cli_master_manual_prompt\releases\copilot-cli-master-reference-lucio.docx
+- Sources: 43
+- Heading paragraphs: 189
+- Tables: 28
+- Cached contents links: 189
+- Validation: DOCX reopened; title and author metadata, cover author, updateable contents field, and 300 internal bookmark links checked.
+- Word field update: Microsoft Word updated fields and repaginated the document.
+- Excluded local references rendered as text: 44
+- Evidence: see the verification ledger for tested scenarios and remaining platform, integration and recipe limitations.
+
+## Included sources
+
+- `docs/fundamentals/01-orientation.md`
+- `docs/fundamentals/02-setup.md`
+- `docs/fundamentals/03-sessions.md`
+- `docs/commands/01-command-literacy.md`
+- `docs/commands/02-initialization.md`
+- `docs/commands/03-plan-to-acceptance.md`
+- `docs/commands/04-operation-reference.md`
+- `docs/models/01-selection.md`
+- `docs/models/02-decisions.md`
+- `docs/models/03-evaluation.md`
+- `docs/context/01-instructions.md`
+- `docs/context/02-context-lifecycle.md`
+- `docs/context/03-task-contracts.md`
+- `docs/agents/01-supervised-autonomy.md`
+- `docs/agents/02-custom-agents.md`
+- `docs/agents/03-end-to-end.md`
+- `docs/extensions/01-mechanisms.md`
+- `docs/extensions/02-lifecycle.md`
+- `docs/extensions/03-toolkit.md`
+- `docs/security/01-permissions-isolation.md`
+- `docs/security/02-threats-response.md`
+- `docs/security/03-governance.md`
+- `docs/cookbook/00-recipe-contract.md`
+- `docs/cookbook/01-discovery-planning.md`
+- `docs/cookbook/02-brownfield-quality.md`
+- `docs/cookbook/03-modernization-operations.md`
+- `docs/cookbook/04-fullstack-ai.md`
+- `docs/cookbook/05-context-recovery.md`
+- `docs/appendices/extensions.md`
+- `docs/appendices/glossary-index.md`
+- `docs/appendices/security-checklist.md`
+- `docs/appendices/templates.md`
+- `docs/appendices/troubleshooting.md`
+- `reference/command-index.md`
+- `reference/slash-command-catalog.md`
+- `reference/commands-1.0.109.md`
+- `reference/configuration-index.md`
+- `reference/options-1.0.109.md`
+- `reference/compatibility-models.md`
+- `reference/models-live-matrix.md`
+- `reference/feature-inventory.md`
+- `reference/source-registry.md`
+- `reference/verification-ledger.md`
+
+## Excluded local links
+
+- `docs/fundamentals/02-setup.md: ../../research/evidence/copilot-1.0.109-npm-fixture.txt`
+- `docs/commands/03-plan-to-acceptance.md: ../../research/evidence/copilot-1.0.109-plan-check.md`
+- `docs/context/01-instructions.md: ../../research/evidence/copilot-1.0.109-instruction-discovery.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-plugin-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-mcp-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-skill-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-plugin-install-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-plugin-uninstall-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-mcp-add-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-mcp-remove-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-skill-add-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-skill-remove-help.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-disposable-checks.txt`
+- `docs/appendices/extensions.md: ../../research/evidence/copilot-1.0.109-plugin-fixture.txt`
+- `reference/command-index.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/command-index.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/command-index.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/slash-command-catalog.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/slash-command-catalog.md: aliasesremove,rm`
+- `reference/slash-command-catalog.md: aliasrefresh`
+- `reference/commands-1.0.109.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/configuration-index.md: ../research/evidence/copilot-1.0.109-help.txt`
+- `reference/configuration-index.md: ../research/evidence/copilot-1.0.109-help.txt`
+- `reference/configuration-index.md: ../research/evidence/copilot-1.0.109-config-help.txt`
+- `reference/configuration-index.md: ../research/evidence/copilot-1.0.109-environment-help.txt`
+- `reference/options-1.0.109.md: ../research/evidence/copilot-1.0.109-help.txt`
+- `reference/source-registry.md: ../research/evidence/copilot-1.0.109-help.txt`
+- `reference/source-registry.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-version.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-help.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-commands.txt`
+- `reference/verification-ledger.md: ../releases/BUILD-REPORT.md`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-plugin-help.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-instruction-discovery.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-disposable-checks.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-plugin-fixture.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-disposable-checks.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-mcp-retry.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-authenticated-probe.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-recipe-fixtures.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-plan-check.md`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-init-fixture.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-npm-fixture.txt`
+- `reference/verification-ledger.md: ../research/evidence/copilot-1.0.109-interactive-init.md`

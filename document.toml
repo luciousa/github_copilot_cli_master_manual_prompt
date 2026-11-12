@@ -1,0 +1,35 @@
+[document]
+title = "GitHub Copilot CLI Advanced Vibe Coding Master Reference"
+author = "Lucio A. Da Silva"
+subtitle = "VERSION-AWARE REFERENCE — EVIDENCE REVIEWED 2026-11-11"
+evidence_date = "2026-11-11"
+output = "releases/copilot-cli-master-reference-lucio.docx"
+report = "releases/copilot-cli-master-reference-lucio-build.md"
+body_font = "Calibri"
+heading_font = "Calibri"
+accent = "173A5E"
+body_size = 10.5
+toc_depth = 3
+
+[sources]
+groups = [
+  "docs/fundamentals/**/*.md",
+  "docs/commands/**/*.md",
+  "docs/models/**/*.md",
+  "docs/context/**/*.md",
+  "docs/agents/**/*.md",
+  "docs/extensions/**/*.md",
+  "docs/security/**/*.md",
+  "docs/cookbook/**/*.md",
+  "docs/appendices/**/*.md",
+  "reference/command-index.md",
+  "reference/slash-command-catalog.md",
+  "reference/commands-1.0.109.md",
+  "reference/configuration-index.md",
+  "reference/options-1.0.109.md",
+  "reference/compatibility-models.md",
+  "reference/models-live-matrix.md",
+  "reference/feature-inventory.md",
+  "reference/source-registry.md",
+  "reference/verification-ledger.md",
+]

@@ -1,0 +1,25 @@
+Windows npm lifecycle; disposable prefix, cache and Copilot home; npm user config isolated, auth environment removed. Version pinned to 1.0.109.
+
+## npm install
+Exit: 0
+
+added 3 packages in 10s
+npm notice
+npm notice New major version of npm available! 11.1.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+
+Expected npm shim present after install: True
+
+## installed CLI version
+Exit: 0
+GitHub Copilot CLI 1.0.109.
+Run 'copilot update' to check for updates.
+
+## npm uninstall
+Exit: 0
+
+removed 3 packages in 1s
+
+Expected npm shim absent after uninstall: True

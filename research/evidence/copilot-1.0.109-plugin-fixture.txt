@@ -1,0 +1,61 @@
+Environment: Windows; CLI 1.0.109; disposable COPILOT_HOME and local plugin containing a minimal plugin.json; token environment variables removed. The cache was redirected to a temporary writable cache. Paths are redacted.
+Commands exercised: copilot plugin install <local fixture directory>; copilot plugin list --json; copilot plugin uninstall qa-fixture; copilot plugin list --json. Bracketed source denotes the disposable directory, not a literal command argument.
+
+## plugin install local
+Exit: 0
+Plugin "qa-fixture" installed successfully.
+
+Warning: Direct plugin installs (repos, URLs, local paths) are deprecated. Only plugin@marketplace installs will be supported in a future release.
+
+
+## plugin list
+Exit: 0
+[
+  {
+    "name": "qa-fixture",
+    "marketplace": "",
+    "version": "0.0.1",
+    "enabled": true,
+    "source": "installed"
+  },
+  {
+    "name": "computer-use",
+    "marketplace": "",
+    "version": "0.1.97",
+    "enabled": false,
+    "source": "builtin"
+  },
+  {
+    "name": "browser-use",
+    "marketplace": "",
+    "version": "0.1.0",
+    "enabled": false,
+    "source": "builtin"
+  }
+]
+
+
+## plugin uninstall
+Exit: 0
+Plugin "qa-fixture" uninstalled successfully.
+
+
+## plugin list after uninstall
+Exit: 0
+[
+  {
+    "name": "computer-use",
+    "marketplace": "",
+    "version": "0.1.97",
+    "enabled": false,
+    "source": "builtin"
+  },
+  {
+    "name": "browser-use",
+    "marketplace": "",
+    "version": "0.1.0",
+    "enabled": false,
+    "source": "builtin"
+  }
+]
+

@@ -1,0 +1,18 @@
+Environment: disposable home and appdata directories, no forwarded token variables, Windows CLI 1.0.109. Remote URL is a non-resolving fixture; no server invocation requested.
+## add HTTP fixture
+Exit: 1
+Error: Shared writer storage I/O failed. (os_error=5)
+
+
+## list filtered
+Exit: 0
+(fixture absent from output)
+
+## remove fixture
+Exit: 1
+Error: Server "qa-fixture" not found.
+
+
+## list after remove
+Exit: 0
+(fixture absent from output)

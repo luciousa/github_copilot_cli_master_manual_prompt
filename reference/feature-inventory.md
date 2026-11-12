@@ -1,0 +1,23 @@
+# Feature inventory and evidence status
+
+**Baseline: 2026-11-11.** This inventory retains the original research questions as historical context; later observations and dated catalogs supersede its proposed work. See the [slash-command catalog](slash-command-catalog.md), [model matrix](models-live-matrix.md), [verification ledger](verification-ledger.md) and [source registry](source-registry.md). “Documented” means GitHub describes CLI support; lifecycle and minimum version are not assumed where evidence is missing.
+
+| Area | Documentary baseline | Classification and outstanding work |
+|---|---|---|
+| Installation, upgrade, authentication | S03 documents WinGet, Homebrew, npm and macOS/Linux install scripts; Windows requires PowerShell 6+, npm requires Node 22+, and organization policy can block access. | CLI documented; version thresholds and exact channel/platform matrix unverified. Resolve Homebrew discrepancy (V04, conflict 1). |
+| Interactive operation, flags, configuration, diagnostics | S01 and S14 provide current reference and operation guidance. | Documented; complete list, aliases, scopes, side effects, version introduction/removal and runtime behavior unverified. |
+| `/init` and `/plan` | S01 and S05 describe initialization and planning; S01 documents a plan-to-autopilot exception. | Documented; test actual writes, plan storage, approval boundaries, arguments and version support (V05–V06). |
+| Other slash commands | S01 contains a CLI-specific catalog; interactive availability may vary. | Inventory incomplete; enumerate and compare against version-pinned local help, including aliases, prerequisites, destructive actions and experimental status. |
+| Models and controls | S01 and S11 describe CLI selection; availability varies by account and policy. | Documented; current per-plan matrix, model identifiers, deprecations, fallback, billing and measured performance unverified. Do not rank models without evidence. |
+| Context and instruction files | S01 and S07 document repository, user and agent instruction conventions, scoping and combination. | Documented; test discovery, nested paths, context, imports and subagent exceptions. No general precedence should be invented. |
+| Skills | S08 documents `SKILL.md` and project/personal locations. | CLI documented; version, discovery, trust, removal and third-party candidates unverified. |
+| Custom agents and subagents | S06 documents separate-context custom subagents; S01 describes instruction inheritance. | CLI documented; version, delegation limits, parallelism and entitlements require verification. |
+| MCP and connectors | S09 documents MCP and built-in GitHub server; S13 identifies connectors as public preview. | MCP documented; connectors **preview** per S13. Exact trust boundaries, configuration and install/remove must be verified. |
+| Plugins and marketplaces | S06 and S10 document packaged customizations and marketplace management. | CLI documented; release-specific defaults, lifecycle and candidate provenance require checks. No marketplace or plugin is yet recommended. |
+| Hooks and language servers | S06 documents hooks; S13 identifies CLI language-server support. | CLI documented; maturity, supported events, platform and security effects unverified. |
+| Permissions, sandbox and autonomy | S12, S14, S15 describe sandbox enforcement, approvals and autopilot. | CLI documented; sandbox availability, defaults, OS and organization policy matrix unverified. Treat external isolation, secret management and organizational controls separately. |
+| Privacy, governance and costs | Account policy dependence is documented in S03 and S11. | Specific retention, telemetry, auditability, compliance, quotas and cost claims remain unverified; research current primary policy and billing sources. |
+| Cookbook and integrations | Candidate scenarios: repo investigation, .NET and web changes, test/review, modernization, CI/CD, SQL, Docker, cloud, RAG and recovery. | Scenarios are proposed, not verified recipes. Validate CLI workflow, source, approval boundary and acceptance test for each; no quota padding. |
+| Publication | Markdown, DOCX and PDF requested; Pandoc and Python tooling discovered (V11). | Consolidation and DOCX appear feasible; PDF and accessible navigation/format fidelity unverified until actual build and inspection. |
+
+**Unsupported/removed/deprecated:** no exhaustive review performed. S13 marks prompt files unsupported in Copilot CLI; that does not rule out ordinary prompt text or skill files. Identify removed or deprecated features with versioned evidence instead of inferring them from absence. No exact executable integration artifact or installation procedure has passed Gate 1 validation.

@@ -1,0 +1,48 @@
+Environment: Windows; CLI 1.0.109; disposable temporary Git repository and COPILOT_HOME; token environment variables removed. The cache was redirected to a temporary writable cache. Paths and list output are redacted/filtered. No MCP server was started.
+Commands exercised: copilot instruction list; copilot skill add <local SKILL.md>; copilot skill list --json; copilot skill remove qa-fixture; copilot mcp add qa-fixture -- node --version; copilot mcp list --json; copilot mcp remove qa-fixture. Bracketed source is the disposable fixture file, not a literal command argument.
+
+## git init
+Exit: 0
+
+
+## instruction discovery
+Exit: 0
+(fixture absent from output)
+
+## skill add local file
+Exit: 0
+Added personal skill "qa-fixture" from file.
+Created <TEMP>\home\copilot\skills\qa-fixture
+
+
+## skill list after add
+Exit: 0
+    "name": "qa-fixture",
+    "path": "<TEMP>/home/copilot/skills/qa-fixture",
+
+## skill remove
+Exit: 0
+Removed skill "qa-fixture" (<TEMP>\home\copilot\skills\qa-fixture).
+
+
+## skill list after remove
+Exit: 0
+(fixture absent from output)
+
+## mcp add inert fixture
+Exit: 1
+Error: Shared writer storage I/O failed. (os_error=5)
+
+
+## mcp list after add
+Exit: 0
+(fixture absent from output)
+
+## mcp remove
+Exit: 1
+Error: Server "qa-fixture" not found.
+
+
+## mcp list after remove
+Exit: 0
+(fixture absent from output)

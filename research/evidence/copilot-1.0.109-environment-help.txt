@@ -1,0 +1,190 @@
+Environment Variables:
+
+  `COPILOT_ALLOW_ALL`: allow all tools to run automatically without confirmation. Accepts "true", "1", "yes", "on", or "y", case-insensitively and ignoring surrounding whitespace; "false", "0", "no", "off", "n", or an empty value turn it off. Setting it to exactly "true" additionally trusts the working directory without prompting, which loads that directory's skills, plugins, MCP servers, and hooks, including hooks that run shell commands; the other truthy spellings only auto-approve tools.
+
+  `COPILOT_ASSISTED_APPROVAL`: set to "true" (or "1", "yes", "on") to review tool permission requests with the assisted-approval safety judge, like --assisted-approval. Supported only in non-interactive prompt mode (-p); an interactive session refuses to start while it is set.
+
+  `COPILOT_AUTO_TIER`: optionally set the Auto routing profile to "efficiency", "balance", or "intelligence", or a server-advertised profile in local sessions. "fast" is ignored with a notice, because the CLI cannot run on that profile. Requires the effective model to be Auto and is overridden by --auto-tier or persisted configuration.
+
+  `COPILOT_AUTO_UPDATE`: set to "false" to disable downloading updated CLI versions and the plugin updates run when a session starts. The --no-auto-update flag disables the CLI download only. Auto-update is enabled by default, except in CI environments (detected via `CI`, `BUILD_NUMBER`, `RUN_ID`, or `SYSTEM_COLLECTIONURI` environment variables), where it is disabled by default. Standalone development builds run their bundled package by default and do not offer or install CLI updates unless release-style package behavior is selected with a canonical semantic version in `COPILOT_CLI_VERSION`. `COPILOT_CLI_DIST_DIR` selects an explicit package but does not enable updates for a development-identity package. On other standalone-binary installations, disabling it this way or with --no-auto-update also makes launches ignore any newer version already in the package cache and run the version built into the installed binary.
+
+  `COPILOT_BACKGROUND_COMPACTION_THRESHOLD`: fraction of the model's context window (for example "0.7") at which the CLI starts compacting the conversation in the background; defaults to 0.8 (a few models have their own default).
+
+  `COPILOT_BASH_PATH`: path of the bash executable used for the agent's shell commands and for command hooks. By default the first executable of /bin/bash, /usr/bin/bash, /usr/local/bin/bash, and /run/current-system/sw/bin/bash is used, then bash from PATH; on Windows, bash from PATH.
+
+  `COPILOT_BUFFER_EXHAUSTION_THRESHOLD`: fraction of the model's context window at which compaction blocks the conversation until it finishes; defaults to 0.95.
+
+  `COPILOT_CACHE_HOME`: directory for cached data that can be deleted and re-created, such as downloaded CLI versions. Not affected by COPILOT_HOME. Defaults to `~/Library/Caches/copilot` on macOS, `%LOCALAPPDATA%\copilot` on Windows, and `$XDG_CACHE_HOME/copilot` or `~/.cache/copilot` elsewhere.
+
+  `COPILOT_CHILD_OOM_SCORE_ADJ`: Linux only. The `oom_score_adj` given to shell processes the CLI starts, so that under memory pressure the kernel ends those before the CLI. An integer from -1000 to 1000, or "off" to leave it unchanged; defaults to 300. A child never gets a lower score than the CLI itself.
+
+  `COPILOT_CLI_VERSION`: override the CLI version used for update comparisons. On standalone development builds, a canonical semantic version also opts into release-style cached-package selection and CLI updates, but does not pin cache selection to that exact version or change the version displayed by `--version`. An empty or non-canonical value is treated as unset for package selection and updates.
+
+  `COPILOT_CUSTOM_INSTRUCTIONS_DIRS`: comma-separated list of additional directories to search for custom instructions files (in addition to git root and current working directory).
+
+  `COPILOT_DISABLE_DESKTOP_NOTIFICATIONS`: set to "1" to suppress desktop notifications, even when the `notifications` setting is on.
+
+  `COPILOT_DISABLE_LOGIN_SHELL_ENV`: set to "1" or "true" to stop re-reading your login-shell environment for the agent's shell commands. By default, on macOS and Linux, the CLI runs bash once as a login shell (`bash -l`, which reads /etc/profile and ~/.bash_profile, ~/.bash_login, or ~/.profile, but not ~/.bashrc) and applies the PATH and variables it exports, so tools your profile activates (conda, nvm, Homebrew) are found.
+
+  `COPILOT_DISABLE_RESUME_AUTO_CD`: set to "1" or "true" so that --resume does not switch to the working directory recorded for the resumed session.
+
+  `COPILOT_EDITOR`, `VISUAL`, `EDITOR` (in order of precedence): command used to interactively edit a file (e.g., the plan).
+
+  `COPILOT_GITHUB_TOKEN`, `GH_TOKEN`, `GITHUB_TOKEN` (in order of precedence): an authentication token that takes precedence over previously stored credentials. Exception: in Codespaces, the auto-injected `GITHUB_TOKEN` (a user-to-server token) does not take precedence over a `/login` account. An explicitly exported `GITHUB_TOKEN`, `COPILOT_GITHUB_TOKEN`, or `GH_TOKEN` still takes precedence.
+
+  `COPILOT_HOME`: override the directory where configuration and state files are stored; defaults to `$HOME/.copilot`. See "Files and directories" in `copilot help config` for what it holds.
+
+  `COPILOT_HOOK_ALLOW_HTTP_AUTH_HOOKS`: set to "1" to let preToolUse, preMcpToolCall, and permissionRequest HTTP hooks use plain http:// URLs; otherwise they must use https://.
+
+  `COPILOT_HOOK_ALLOW_LOCALHOST`: set to "1" to let HTTP hooks post to localhost and other loopback addresses, which are otherwise blocked; plain http:// is then also accepted for those addresses.
+
+  `COPILOT_INLINE_IMAGES_TMUX`: set to "0" to stop forwarding inline images through tmux. Forwarding also requires `allow-passthrough on` in tmux.
+
+  `COPILOT_LOGIN_SHELL_ENV_TIMEOUT_MS`: time limit in milliseconds for reading the login-shell environment (see COPILOT_DISABLE_LOGIN_SHELL_ENV); defaults to 4000. Values that are not positive integers log a warning and use the default. If the capture fails or times out, the inherited environment is used.
+
+  `COPILOT_LLM_RESPONSE_MAX_BYTES`: maximum decoded/decompressed HTTP LLM response body (including streaming and error responses), or complete incoming WebSocket message, in bytes. Defaults to 134217728 (128 MiB). Larger responses fail the request without retrying; exactly the limit is accepted. Set before starting the process. Invalid or non-positive integers log a warning and use the default.
+
+  `COPILOT_MASCOT_BLINK`: set to "0" to turn off the mascot's blink animation in the header.
+
+  `COPILOT_MODEL`: optionally set the agent model, including a model for a provider set with COPILOT_PROVIDER_* variables. Can be overridden by the --model command line option or the /model command.
+
+  `COPILOT_MULTIPLEXER`: override which terminal multiplexer the CLI believes it is running directly inside. One of "tmux", "herdr", or "none"; unrecognized values are ignored. "none" declares that no multiplexer wraps this pane; it does not restore env-derived host-terminal identity inside a herdr pane, whose inherited `TERM_PROGRAM`/`WT_SESSION`-style markers describe the terminal that started the herdr server and stay untrusted. Detection is otherwise automatic from the environment. Set this when it guesses wrong — most often `COPILOT_MULTIPLEXER=tmux` for tmux running nested inside a herdr pane, because herdr panes inherit whatever `TMUX` the herdr server itself was started with.
+
+  `COPILOT_NOTIFICATION_BATCH_MAX_WAIT_SECONDS`: maximum wait in seconds for batching completed background notifications while other notifying work runs. Accepts non-negative numbers, including fractions; 0 removes the intentional wait. Defaults to 60 for missing or invalid values. Online experiment assignments take precedence over this local value.
+
+  `COPILOT_OFFLINE`: set to "true" to enable offline mode. When active, the CLI skips all network access: GitHub authentication, telemetry, web tools, GitHub MCP server, and auto-update are disabled. Requires a local model provider, either one you added in /model or one set with COPILOT_PROVIDER_BASE_URL. Refer to `copilot help providers`.
+
+  `COPILOT_PLUGIN_DIR_ONLY`: set to "true" to turn off automatic plugin discovery, so that only plugins passed with --plugin-dir are loaded.
+
+  `COPILOT_PROVIDERS_CONFIG`: path of the custom model providers file; defaults to `$COPILOT_HOME/providers.json`.
+
+  `COPILOT_PROVIDER_BASE_URL`: API endpoint URL for a custom model provider (BYOK), for providers you can't add in /model and for scripts. When set, the CLI uses this provider instead of GitHub Copilot's model routing and ignores a saved `providers.json`, unless COPILOT_PROVIDERS_CONFIG names a providers file, which then wins. GitHub authentication is not required. For type "azure", use a host URL or a full project URL, including its `/api/projects/<project>` path.
+
+  `COPILOT_PROVIDER_TYPE`: provider type when using BYOK. One of "openai" (default), "azure", or "anthropic". Use "openai" for OpenAI-compatible endpoints including Ollama, vLLM, and Foundry Local.
+
+  `COPILOT_PROVIDER_API_KEY`: API key for the custom provider. Optional for local providers like Ollama.
+
+  `COPILOT_PROVIDER_API_KEY_COMMAND`: shell command that prints a fresh API key for each provider request. Takes precedence over COPILOT_PROVIDER_API_KEY.
+
+  `COPILOT_PROVIDER_BEARER_TOKEN`: bearer token for custom provider authentication. For "openai" and "azure" it takes precedence over COPILOT_PROVIDER_API_KEY; "anthropic" sends both.
+
+  `COPILOT_PROVIDER_WIRE_API`: API format for the custom provider. One of "completions" (default) or "responses". Use "responses" for GPT-5 series models.
+
+  `COPILOT_PROVIDER_TRANSPORT`: transport for the custom provider. One of "http" (default) or "websockets". "websockets" works only with `COPILOT_PROVIDER_TYPE=openai` and `COPILOT_PROVIDER_WIRE_API=responses`, to use OpenAI Responses over WebSocket.
+
+  `COPILOT_PROVIDER_AZURE_API_VERSION`: Azure API version when using type "azure". When omitted, uses the GA versionless v1 route. Set explicitly (e.g. "2024-10-21") to use the legacy versioned deployment route.
+
+  `COPILOT_PROVIDER_MODEL_ID`: well-known model ID used for agent configuration and token limits. Defaults to the --model value, else COPILOT_MODEL.
+
+  `COPILOT_PROVIDER_WIRE_MODEL`: model name sent to the provider API for inference. Defaults to the --model value, else COPILOT_MODEL, else COPILOT_PROVIDER_MODEL_ID.
+
+  `COPILOT_PROVIDER_MAX_PROMPT_TOKENS`: maximum prompt tokens for the BYOK model. Overrides both catalog and default values.
+
+  `COPILOT_PROVIDER_MAX_OUTPUT_TOKENS`: maximum output tokens for the BYOK model. Overrides both catalog and default values.
+
+  `COPILOT_PROVIDER_VISION`: set to "true" if the BYOK model accepts image input. BYOK models are treated as text-only unless this is set, so images that tools return (such as an image file the agent views or a screenshot from an MCP server) are not sent to the model.
+
+  `COPILOT_PROVIDER_HEADERS`: custom HTTP headers sent only to the BYOK provider endpoint (not to GitHub Copilot services). Newline-separated "Name: Value" pairs; a literal "\n" also separates entries in a double-quoted shell string. Useful for gateway keys, tenant IDs, or routing headers.
+
+  `COPILOT_PROXY_KERBEROS`: set to "0", "false", "off", or "no" to turn off automatic Kerberos/Negotiate authentication with proxies that ask for it.
+
+  `COPILOT_SKILLS_DIRS`: comma-separated list of additional directories to search for skills, used together with the `skillDirectories` setting. A leading `~` stands for your home directory.
+
+  `COPILOT_SYSTEM_PROXY`: set to "0" or "false" to ignore the operating system's proxy configuration; requests then go direct unless a proxy is set with HTTP_PROXY/HTTPS_PROXY or the `proxyUrl` setting.
+
+  `COPILOT_TASK_WAIT_TIMEOUT_SECONDS`: in non-interactive prompt mode (-p, including -p --autopilot), how many seconds to wait for background agents and shell commands to finish before exiting; defaults to 600. "0" stops waiting at once; empty, negative, or non-numeric values use the default.
+
+  `COPILOT_WEB_FETCH_ALLOW_LOCALHOST`: set to "1" to let the web_fetch tool fetch from hosts that resolve only to loopback addresses, such as localhost. When the sandbox is on, its `network.allowLocalNetwork` setting grants the same access.
+
+  `GH_HOST`: GitHub hostname for authentication and API requests; defaults to "github.com". Set this to your GitHub Enterprise Cloud with data residency hostname (e.g., "mycompany.ghe.com"). Use when both GitHub CLI and Copilot CLI should target the same host.
+
+  `COPILOT_GH_HOST`: GitHub hostname used only by Copilot CLI for authentication and API requests, overriding GH_HOST when set. Useful when GH_HOST points to a GitHub Enterprise Server instance but Copilot CLI needs to authenticate against github.com or a GitHub Enterprise Cloud with data residency hostname instead.
+
+  `HTTP_PROXY`, `HTTPS_PROXY` (case-insensitive): proxy server URL for outgoing HTTP and HTTPS connections respectively (e.g., "http://proxy.example.com:8080").
+
+  `NO_COLOR`: when set (to any value), disables color output. See https://no-color.org/ for details.
+
+  `NO_PROXY` (case-insensitive): comma-separated list of hostnames or patterns that should bypass the proxy (e.g., "localhost,127.0.0.1,.example.com").
+
+  `PLAIN_DIFF`: when set to "true", disables rich diff rendering (syntax highlighting via diff tool specified by git config). Can also be set with the --plain-diff flag.
+
+  `USE_BUILTIN_RIPGREP`: when set to "false", uses the ripgrep binary from PATH instead of the bundled version.
+
+  `USE_TGREP`: when set to "true", enables tgrep indexed search regardless of repository size, and also overrides the automatic-start checks described here (it does not override whether indexed search is available for your account, and `USE_BUILTIN_RIPGREP=false` still disables it). tgrep starts even outside a git repository, indexing the working directory itself (so avoid forcing it somewhere large, such as a home directory or filesystem root), and even on a virtualized or network filesystem (for example a VFS for Git checkout, or an SMB or 9p mount). Forcing tgrep also bypasses the Windows cloud-sync safety check, even if detection fails; indexing cloud-sync folders can download cloud-only files. When set to "false", disables tgrep and uses ripgrep. When unset, tgrep is enabled automatically only inside a git repository whose root is neither the user's home directory nor a filesystem root, on a non-virtualized filesystem, and at or above the file-count threshold (10,000 files with the current configuration); Windows cloud-sync folders and detection failures still disable automatic tgrep startup, and ripgrep is used otherwise.
+
+  Automatic startup skips Git roots that are the user's home directory or a filesystem root (including Windows drive and network-share roots) before counting files or reserving a server slot, even when the session starts in one of their subdirectories. If the home directory cannot be determined, automatic startup is also skipped. Separate repositories beneath these directories remain eligible, with or without a Git remote. `USE_TGREP=true` explicitly permits indexing these otherwise-excluded roots.
+
+  Git worktrees from the same repository share one tgrep daemon, identified by their canonical Git common directory. Sessions starting at the same committed tree share an immutable base index, even on different branches, while edits, untracked files, and deletions remain private to each worktree. Managed-v2 is enabled by default for eligible repositories, with bounded retention and adaptive advancement to the worktree's own committed HEAD when overlay-cost thresholds are met. Unrelated clones never share a base. Non-Git folders and repositories without a commit retain single-root indexing.
+
+  The built-in managed policy admits two repository daemons and two work slots per cache, with a 64 GiB aggregate storage budget, a 16 GiB allocation per repository, and an 8 GiB retention target per repository. Each daemon uses one indexing worker; staging and private-work reservations are each capped at 16 GiB in aggregate and 8 GiB per repository. These are accounting limits, not upfront allocations or hard process-memory limits. Admission and maintenance run in the background; searches scan until their view is ready. Shared bases live outside disposable worktrees under `tgrep-shared/tgrep-managed-v2`. Runtime shutdown reaps owned daemons after local session teardown; peers reconnect using authoritative pins. External servers are not killed or covered by the managed-daemon cap.
+
+  `USE_TGREP_MANAGED`: set to "false" to opt out of managed-v2 and restore v1 fixed-pin/retain-all compatibility, including its one-server limit. This overrides `TGREP_SHARED_CONFIG` without reading that file. Unset or "true" selects managed-v2; other values are rejected. This flag does not force indexing or bypass eligibility. `USE_TGREP=false` disables all tgrep indexing and runtime cache maintenance.
+
+  `TGREP_SHARED_CONFIG`: optional path to a complete managed-v2 JSON configuration overriding the built-in defaults. Durations are milliseconds and sizes are bytes; missing fields and invalid files are rejected, not merged with defaults. All managed processes sharing a cache must use the same effective configuration. Use `/index status`, `/index advance <commit>`, and `/index policy <version> <file>` to inspect or change authoritative state. `/index collect` only previews; `/index collect --run` authorizes collection. Before removing a worktree, require `/index release` to acknowledge `root_handles_released: true`; a busy response is not permission to delete. Scheduled tgrep-owned reclamation includes deleted repositories while an eligible Copilot host runs; no operating-system service is installed. Opting out does not convert or delete existing managed storage. See `copilot-runtime-requirements.md` in the runtime repository for configuration and rollout details.
+
+  `TGREP_FILE_COUNT_THRESHOLD`: minimum file count for automatic tgrep indexed search. Accepts a non-negative integer, ignoring surrounding whitespace. Defaults to 10,000 on Windows and 50,000 on other platforms. Invalid values log a warning and use the platform default. Automatic sessions must meet this threshold before reusing an existing index and recheck it before taking over its server. Setting it to 0 removes only the file-count requirement; all other automatic-start checks still apply. `USE_TGREP=true` bypasses this threshold, and `USE_TGREP=false` still disables tgrep.
+
+  `USE_TGREP_WARM_START`: when set to "true", blocks Copilot CLI startup until the tgrep index is ready when tgrep starts. It does not enable tgrep on its own; pair with `USE_TGREP=true` to force indexing and wait for readiness. Useful for evaluating tgrep search against a warm index.
+
+  Set by Copilot CLI for processes it starts:
+
+  `COPILOT_CLI`: "1" in the agent's shell commands and in hooks, so scripts such as git hooks can tell they run under Copilot CLI.
+
+  `COPILOT_AGENT_SESSION_ID`: the current session's ID, in the agent's shell commands.
+
+  `COPILOT_PROJECT_DIR`: the repository root, or the working directory outside a repository, in hooks (also as `CLAUDE_PROJECT_DIR`).
+
+  `COPILOT_PLUGIN_ROOT`, `COPILOT_PLUGIN_DATA`: a plugin's installation directory and its data directory, in that plugin's hooks (also as `PLUGIN_ROOT`, `CLAUDE_PLUGIN_ROOT`, and `CLAUDE_PLUGIN_DATA`).
+
+  `COPILOT_HOOK_DIR`: in a command hook, the directory of the file that defines it.
+
+  `COPILOT_HOOK_DEPTH`: in a command hook, how many hook launches lead to it ("1" when the CLI was not itself started from a hook), so a hook can stop sessions that keep launching each other.
+
+  `COPILOT_TRACEPARENT`, `COPILOT_TRACESTATE`: in a command hook, the W3C trace context of the operation that ran it, when there is one.
+
+  `COPILOT_SESSION_CWD`: the session's working directory, for `${COPILOT_SESSION_CWD}` references in LSP and local MCP server configs.
+
+  OpenTelemetry / Monitoring:
+
+  `COPILOT_TELEMETRY_DISABLED`: set to "true" before startup to disable Copilot-owned GitHub and Entra authentication telemetry process-wide, like `--disable-client-telemetry`. Does not affect independently configured OpenTelemetry, server-side telemetry, or OS/broker telemetry.
+
+  `COPILOT_OTEL_ENABLED`: set to "true" to explicitly enable OpenTelemetry instrumentation.
+
+  `OTEL_EXPORTER_OTLP_ENDPOINT`: OTLP endpoint URL. Setting this automatically enables OTel.
+
+  `COPILOT_OTEL_EXPORTER_TYPE`: Copilot exporter backend; "otlp-http" (default) or "file" for local JSON-lines output.
+
+  `OTEL_EXPORTER_OTLP_PROTOCOL`: OTLP HTTP protocol for the "otlp-http" exporter; "http/json" (default) or "http/protobuf". Use `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` or `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL` to override per signal.
+
+  `COPILOT_OTEL_FILE_EXPORTER_PATH`: file path for JSON-lines output. Setting this automatically enables OTel.
+
+  `COPILOT_OTEL_SOURCE_NAME`: instrumentation scope name for tracer and meter; defaults to "github.copilot".
+
+  `OTEL_SERVICE_NAME`: service name in resource attributes; defaults to "github-copilot".
+
+  `OTEL_RESOURCE_ATTRIBUTES`: extra resource attributes as comma-separated key=value pairs.
+
+  `OTEL_EXPORTER_OTLP_HEADERS`: authentication headers for the OTLP exporter (e.g., "Authorization=Bearer token").
+
+  `OTEL_EXPORTER_OTLP_CERTIFICATE`: path to a PEM file with extra CA certificate(s) to trust for the OTLP endpoint (e.g., a private/corporate CA). Merged with the OS trust store. Per-signal: `OTEL_EXPORTER_OTLP_TRACES_CERTIFICATE`, `OTEL_EXPORTER_OTLP_METRICS_CERTIFICATE`.
+
+  `OTEL_EXPORTER_OTLP_CLIENT_CERTIFICATE` / `OTEL_EXPORTER_OTLP_CLIENT_KEY`: paths to the client certificate and (unencrypted) private key PEM files for mutual TLS (mTLS). Both must be set together. Per-signal variants are supported.
+
+  `OTEL_INSTRUMENTATION_GENAI_CAPTURE_CONTENT`: "SPAN_ONLY" or "SPAN_AND_EVENT" enables span content; "NO_CONTENT" (default) or "EVENT_ONLY" disables it. Values are case-insensitive. Event export is not implemented.
+
+  `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT`: legacy boolean fallback when the standard content variable is empty or unset.
+
+  `OTEL_LOG_LEVEL`: OTel diagnostic log level (not the CLI --log-level). One of: NONE, ERROR, WARN, INFO, DEBUG, VERBOSE, ALL.
+
+  See `copilot help monitoring` for detailed configuration and examples.
+
+XDG base directories:
+
+  XDG_CONFIG_HOME and XDG_STATE_HOME do not move Copilot CLI's files: settings, skills, sessions and
+  other state live in `$COPILOT_HOME` (default `~/.copilot`); set COPILOT_HOME to move them.
+
+  Older versions used the XDG variables: when COPILOT_HOME is unset, the CLI moves their `.copilot`
+  data into `~/.copilot` at startup.
+
+  Cached data such as downloaded CLI versions is kept apart, in COPILOT_CACHE_HOME, which uses
+  XDG_CACHE_HOME outside macOS and Windows.

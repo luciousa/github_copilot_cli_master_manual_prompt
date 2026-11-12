@@ -1,0 +1,9 @@
+# Interactive planning check
+
+**Date:** 2026-11-11. **Environment:** Windows, Copilot CLI 1.0.109, authenticated GitHub CLI access, temporary workspace and separate temporary Copilot home, auto-update disabled. The interactive status line showed GPT-6.1 Sol and manual approval. The session reported that one MCP server connected and two skills failed to load; neither was intentionally invoked for this check. These account and environment conditions may differ elsewhere.
+
+**Input at interactive prompt:** `/plan Plan creating a single text file named hello.txt containing hello. Do not edit files or run shell commands. Present a short plan and wait for approval.`
+
+**Observed:** The status switched to Plan and Manual Approval. The CLI created a private session plan, displayed a “Plan Ready for Review” dialog and offered multiple paths, including exit to interactive mode without running the plan, accepting into Autopilot, accepting into interactive execution, or suggesting changes. The displayed plan proposed creating and verifying the file only after approval. The target `hello.txt` was absent when checked afterward; the private plan file existed. The session was exited without intentionally authorizing implementation. The exit summary displayed 7.8 AI Credits for this session; actual billing depends on the account's allowance and billing regime.
+
+**Important nuance:** Selecting the dialog's option labeled as exiting without running displayed a transient “Plan approved! Exited plan mode” message. The agent was interrupted and the target file was absent afterward. This single observation does not prove that every side effect is prevented, that all versions present the same options, or that no tools were used beyond what was visibly reported. Do not assume plan mode is an OS sandbox. This test did not verify `/init`, an implementation approval path, a full recipe or plan-then-autopilot.

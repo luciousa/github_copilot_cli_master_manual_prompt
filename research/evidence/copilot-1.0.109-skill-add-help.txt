@@ -1,0 +1,41 @@
+Usage: copilot skill add [OPTIONS] <source>
+
+Add a skill from a file, URL, or directory.
+
+  <directory>   Register a directory of skills (added to your settings)
+  <file>        Create a skill from a local SKILL.md file
+  <url>         Create a skill from a single SKILL.md file fetched over HTTPS
+
+For file and URL sources, the skill is materialized into your personal skills
+directory (~/.copilot/skills/<name>/SKILL.md), or the project's .github/skills
+directory when --project is passed. The skill name comes from the SKILL.md
+frontmatter `name` field, falling back to a name inferred from the file or URL.
+
+Arguments:
+  <source>
+          Skill source (file path, URL, or directory)
+
+Options:
+  -h, --help
+          Print help (see a summary with '-h')
+
+      --project
+          Install the skill into the project's .github/skills
+          directory
+
+Examples:
+  # Add a directory of skills
+  $ copilot skill add ~/my-custom-skills
+
+  # Add a skill from a local file
+  $ copilot skill add ./my-skill/SKILL.md
+
+  # Add a skill to the current project
+  $ copilot skill add --project ./my-skill/SKILL.md
+
+  # Add a skill from a URL (single SKILL.md file)
+  $ copilot skill add https://example.com/my-skill/SKILL.md
+
+Learn More:
+  Use `copilot <command> --help` for more information about a command.
+  Read the documentation at https://docs.github.com/copilot/how-tos/copilot-cli
